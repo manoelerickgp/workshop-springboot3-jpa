@@ -1,17 +1,22 @@
 package com.estudoweb.courseSpringBoot.resources;
 
+import com.estudoweb.courseSpringBoot.entities.User;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/users")
 public class UserResource {
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<String> findAll() {
-        String test = "testando metodo get, value, falou, estamos juntos, legal...";
-        return ResponseEntity.ok().body(test);
+    @GetMapping
+    public ResponseEntity<User> findAll() {
+        User user1 = new User(1L, "Maria", "maria@gmail.com", "123456789", "senha");
+        return ResponseEntity.ok().body(user1);
     }
+
+    /*@GetMapping("{/id}")
+    public ResponseEntity<User> findById(@PathVariable long id) {
+    return null;
+    }*/
+
 }
