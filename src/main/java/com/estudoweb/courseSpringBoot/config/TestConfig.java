@@ -1,8 +1,10 @@
 package com.estudoweb.courseSpringBoot.config;
 
+import com.estudoweb.courseSpringBoot.entities.Category;
 import com.estudoweb.courseSpringBoot.entities.Order;
 import com.estudoweb.courseSpringBoot.entities.User;
 import com.estudoweb.courseSpringBoot.entities.enums.OrderStatus;
+import com.estudoweb.courseSpringBoot.repositories.CategoryRepository;
 import com.estudoweb.courseSpringBoot.repositories.OrderRepository;
 import com.estudoweb.courseSpringBoot.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,17 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Override
     public void run(String... args) throws Exception {
+
+        Category cat1 = new Category(null, "Eletronics");
+        Category cat2 = new Category(null, "Books");
+        Category cat3 = new Category(null, "Computers");
+        //
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
 
         User user1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
         User user2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
@@ -43,8 +54,13 @@ public class TestConfig implements CommandLineRunner {
         Order order7 = new Order(null, Instant.parse("2019-09-19T13:19:10Z"), OrderStatus.PAID, user7);
         Order order8 = new Order(null, Instant.parse("2019-03-09T15:58:59Z"), OrderStatus.WAITING_PAYMENT, user3);
 
-        userRepository.saveAll(Arrays.asList(user1, user2, user3, user4, user5, user6, user7));
 
+        //
+        userRepository.saveAll(Arrays.asList(user1, user2, user3, user4, user5, user6, user7));
+        //
         orderRepository.saveAll(Arrays.asList(order1, order2, order3, order4, order5, order6, order7, order8));
+        //
+
+
     }
 }
