@@ -20,11 +20,15 @@ public class Product implements Serializable {
     private String imgUrl;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     @ManyToMany
     @JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 =======
     @Transient
 >>>>>>> refs/remotes/origin/main
+=======
+    @Transient
+>>>>>>> f7d09dc9bd64673fd5b3853ffd6358c60d74df85
     private Set<Category> categories = new HashSet<>();
 
     public Product() {
