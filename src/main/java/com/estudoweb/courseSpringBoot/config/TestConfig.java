@@ -1,14 +1,8 @@
 package com.estudoweb.courseSpringBoot.config;
 
-import com.estudoweb.courseSpringBoot.entities.Category;
-import com.estudoweb.courseSpringBoot.entities.Order;
-import com.estudoweb.courseSpringBoot.entities.Product;
-import com.estudoweb.courseSpringBoot.entities.User;
+import com.estudoweb.courseSpringBoot.entities.*;
 import com.estudoweb.courseSpringBoot.entities.enums.OrderStatus;
-import com.estudoweb.courseSpringBoot.repositories.CategoryRepository;
-import com.estudoweb.courseSpringBoot.repositories.OrderRepository;
-import com.estudoweb.courseSpringBoot.repositories.ProductRepository;
-import com.estudoweb.courseSpringBoot.repositories.UserRepository;
+import com.estudoweb.courseSpringBoot.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +26,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -80,7 +77,17 @@ public class TestConfig implements CommandLineRunner {
         //
         orderRepository.saveAll(Arrays.asList(order1, order2, order3, order4, order5, order6, order7, order8));
         //
-
+        OrderItem oi1 = new OrderItem(order1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(order1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(order2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(order3, p5, 2, p5.getPrice());
+        OrderItem oi5 = new OrderItem(order4, p2, 1, p2.getPrice());
+        OrderItem oi6 = new OrderItem(order5, p2, 1, p2.getPrice());
+        OrderItem oi7 = new OrderItem(order6, p3, 3, p3.getPrice());
+        OrderItem oi8 = new OrderItem(order7, p1, 2, p1.getPrice());
+        OrderItem oi9 = new OrderItem(order7, p4, 2, p4.getPrice());
+        //
+        orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4, oi5, oi6, oi7, oi8, oi9));
 
     }
 }
