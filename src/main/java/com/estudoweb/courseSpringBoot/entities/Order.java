@@ -90,7 +90,7 @@ public class Order implements Serializable {
     // Expressão lambda com soma de valores de cada produto do pedido
     public Double getTotal() {
         return items.stream()
-                .mapToDouble(OrderItem::subTotal)
+                .mapToDouble(OrderItem::getSubTotal)
                 .sum();
     }
 
