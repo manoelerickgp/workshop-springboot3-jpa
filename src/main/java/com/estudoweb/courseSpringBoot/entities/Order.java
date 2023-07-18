@@ -1,7 +1,6 @@
 package com.estudoweb.courseSpringBoot.entities;
 
 import com.estudoweb.courseSpringBoot.entities.enums.OrderStatus;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -17,8 +16,7 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
 
     private Integer orderStatus;
@@ -39,8 +37,8 @@ public class Order implements Serializable {
     public Order(Long id, Instant moment, OrderStatus orderStatus , User client) {
         this.id = id;
         this.moment = moment;
-        setOrderStatus(orderStatus);
         this.client = client;
+        setOrderStatus(orderStatus);
     }
 
     public Long getId(){
@@ -87,6 +85,13 @@ public class Order implements Serializable {
 
     public Set<OrderItem> getItems(){
         return items;
+    }
+
+    // Expressão lambda com soma de valores de cada produto do pedido
+    public Double getTotal() {
+        return items.stream()
+                .mapToDouble(OrderItem::subTotal)
+                .sum();
     }
 
     @Override
